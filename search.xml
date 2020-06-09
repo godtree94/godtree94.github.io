@@ -57,11 +57,7 @@
   <entry>
     <title>initMyBlogDone</title>
     <url>/posts/18588/</url>
-    <content><![CDATA[<blockquote class="blockquote-center"><p><img src="https://wallpapers.wallhaven.cc/wallpapers/thumb/small/th-151845.jpg" alt> </p>
-</blockquote>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4154720&auto=0&height=66"></iframe>
-
-<p>说起搭建博客,发现以前的我真的很折腾,用过WordPress,折腾各种主题各种插件,好不容易折腾完了放到了sae上,又搞下seo优化,到头来发现,真正写的文章少,质量也不行,后面干脆就都写在自己的txt文件里面存起来好了</p>
+    <content><![CDATA[<p>说起搭建博客,发现以前的我真的很折腾,用过WordPress,折腾各种主题各种插件,好不容易折腾完了放到了sae上,又搞下seo优化,到头来发现,真正写的文章少,质量也不行,后面干脆就都写在自己的txt文件里面存起来好了</p>
 <p>直到最近做项目看别人的博客看多了,发现好多大牛都直接把博客放在github pages上,是静态博客,想着又不用自己去操作貌似功能很强大的管理后台,于是我决定动刀了,于是有了现在这个我很喜欢的博客,应该不会再换了!</p>
 <p>搭建的思路先写下:</p>
 <ol>
@@ -288,28 +284,6 @@
 ]]></content>
       <tags>
         <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>writingPlan</title>
-    <url>/posts/61546/</url>
-    <content><![CDATA[<p>遇到问题,查阅资料,并写下自己的小总结在云笔记里,个人认为这习惯是应该保持的,行走在技术的道路上需要耐心积累,并坚持</p>
-<p>这篇文章长期更新,只是想记录下自己把一些有关联的小总结整理成博文的过程和计划,嘿嘿,不好意思多占了一篇文章(不要打我:-O)</p>
-<p>整理计划:</p>
-<ol>
-<li>对回调函数的见解</li>
-<li>几种树数据结构的演变过程</li>
-<li>常见几种设计模式</li>
-<li>架构的几个关键点</li>
-<li>待更新</li>
-</ol>
-<hr>
-<blockquote>
-<p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/61546/">https://godtree94.github.io/posts/61546/</a></p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>规划</tag>
       </tags>
   </entry>
   <entry>
