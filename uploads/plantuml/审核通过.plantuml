@@ -1,0 +1,20 @@
+@startuml
+start
+:从audit_tag_resource里取出待审核的标签;
+:界面上点击审核通过;
+if(检查层级关系是否正常) then (yes)
+  if(父子标签的类型和等级是否一致) then(yes)
+    if(标签是否重名了) then(yes)
+      stop
+    else (no)
+      :设置AuditTime,VersionTime,设置State为1;
+      :往tag_resource里插入该标签;
+    endif
+  else (no)
+    stop
+  endif
+else (no)
+  stop
+endif
+stop
+@enduml

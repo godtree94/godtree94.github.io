@@ -1,0 +1,35 @@
+@startuml
+start
+:建立map;
+while (逐行检测标签行) is (还没到excel文档末尾)
+    if (当前标签的全路径在nonservice存在) then (yes)
+      :往map插入<当前标签的全路径,标签id>的映射关系;
+    else (no)
+      if (当前标签的全路径在tag_resource存在) then (yes)
+        :往map插入<当前标签的全路径,标签id>的映射关系;
+      else (no)
+        :准备新增标签;
+        if(标签是否一级) then (yes)
+          :设置parentId为0;
+        else (no)
+          if(当前标签父标签的全路径在map中存在) then (yes)
+            :设置parentId为该map中对应的值;
+          else (no)
+            if(当前标签父标签的全路径在tag_resource中存在) then (yes)
+              :设置parentId为tag_resource中对应的值;
+            else (no)
+              :抛出异常,找不到父标签;
+              stop
+            endif
+          endif
+        endif
+        :根据id生成策略生成相应的id;
+        :往map插入<当前标签的全路径,标签id>的映射关系;
+        :往nonservice里插入新标签;
+        :调用存储过程synchnonservicetoaudit同步到audit_tag_resource表;
+      endif
+    endif
+endwhile (到达excel文档末尾)
+  :调用存储过程同步到audit_tag_resource;
+  stop
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+start
+:从audit_tag_resource里取出待编辑的标签(包括待审核的和未通过的);
+:界面上编辑后提交;
+if(检查层级关系是否正常) then (yes)
+  if(父子标签的类型和等级是否一致) then(yes)
+    if(标签是否重名了) then(yes)
+      stop
+    else (no)
+      :更新nonservice表;
+      :数据库定时存储过程同步nonservice到audit_tag_resource表;
+    endif
+  else (no)
+    stop
+  endif
+else (no)
+  stop
+endif
+stop
+@enduml

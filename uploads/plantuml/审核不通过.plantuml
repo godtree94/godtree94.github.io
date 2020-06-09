@@ -1,0 +1,7 @@
+@startuml
+start
+:从audit_tag_resource里取出待审核的标签;
+:界面上点击审核不通过;
+:设置AuditTime,VersionTime,设置State为0;
+stop
+@enduml

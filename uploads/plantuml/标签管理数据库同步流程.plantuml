@@ -1,0 +1,10 @@
+@startuml
+actor 数据研究员
+actor 产品经理
+数据研究员->tag_resource_nonservice : 新增标签
+tag_resource_nonservice->audit_tag_resource : 新增的时候程序主动调用存储过程,其他时候存储过程定时执行
+audit_tag_resource->tag_resource : 程序控制,单条记录同步过去
+tag_resource->tag_resource_import : 定时存储过程同步
+tag_resource_import->tag_resource :新增操作时,程序主动调用存储过程
+产品经理->tag_resource_import : 用更改后的excel去更新标签
+@enduml

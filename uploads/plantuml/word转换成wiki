@@ -1,0 +1,93 @@
+@startuml
+(*) --> ====多线程开始====
+====多线程开始==== -->longyi的word
+longyi的word --> [(1)]"部分表(A表)"
+note left: 有注释
+"部分表(A表)" --> ====多线程结束====
+
+====多线程开始====--> 数据库导出sql
+数据库导出sql --> [(2)]"所有的表(B表)"
+note right: 没有注释的
+"所有的表(B表)"--> ====多线程结束====
+
+====多线程结束==== --> [(3)从A表找出B表对应字段有的注释,并填入](*)
+
+@enduml
+
+(1)
+```
+BEGIN{
+    # print "start transform";
+}
+/create table/{
+    print "";
+    print "|" $0 "|" "|";
+    print "|--------|--------|";
+}
+/--/{
+    split($0,array,"--");
+    print "|" $1 "|" array[2] "|";
+}
+```
+(2)
+```
+BEGIN{
+    # print "start transform";
+}
+/CREATE TABLE/{
+    print "";
+    print "|" $3 "|" "|";
+    print "|--|--|";
+}
+$1~/".*"/{
+    split($1,array,"\"");
+    print "|" array[2] "||";
+}
+```
+(3)
+```
+FNR==NR{
+
+  if($0~/create table/){
+    split($0,temparray,"|")
+    tableName=temparray[2];
+  }
+  split($0,array,"|")
+  temp=tableName "." array[2]
+  a[temp]=array[3]
+  #print temp
+  #print a[temp]
+  next
+}
+{
+    if($0~/"/){
+        #print $0;
+        split($0,array2,"|");
+        #print array2[2];
+        split(array2[2],array3,"\"")
+        #print "create table " array3[2] "." array3[4]
+        newtableName="create table " array3[2] "." array3[4]
+        print ""
+        print "|" newtableName "||"
+        print "|------|------|"
+    }else{
+        split($0,array4,"|");
+        #print newtableName "." array4[2];
+        temptemp=newtableName "." array4[2]
+        if(array4[2]==""){
+            pass
+        }else{
+            if (temptemp in a&&array4[2]!=" ") {
+                print "|" array4[2] "|" a[temptemp] "|"
+            } else {
+                if(array4[2]!~/--/){
+                    print "|" array4[2] "||"
+                }
+            }
+        }
+
+    }
+
+}
+```
+
