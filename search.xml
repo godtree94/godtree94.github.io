@@ -49,66 +49,9 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/4352/">https://godtree94.github.io/posts/4352/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>开发工具技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>initMyBlogDone</title>
-    <url>/posts/18588/</url>
-    <content><![CDATA[<p>说起搭建博客,发现以前的我真的很折腾,用过WordPress,折腾各种主题各种插件,好不容易折腾完了放到了sae上,又搞下seo优化,到头来发现,真正写的文章少,质量也不行,后面干脆就都写在自己的txt文件里面存起来好了</p>
-<p>直到最近做项目看别人的博客看多了,发现好多大牛都直接把博客放在github pages上,是静态博客,想着又不用自己去操作貌似功能很强大的管理后台,于是我决定动刀了,于是有了现在这个我很喜欢的博客,应该不会再换了!</p>
-<p>搭建的思路先写下:</p>
-<ol>
-<li>安装node环境(需要有npm)</li>
-<li>用npm安装hexo-cli,并用hexo命令初始化一个文件夹,这个文件夹就相当于博客的静态页面生成工具,自带服务器环境</li>
-<li>配置git的ssh私钥,方便hexo deploy的时候调用git push时候不用输入密码(其实一开始我以为这一步骤是可以忽略的,但是试了下发现不成功,不知道哪一步错了还是真的不行,也没再试了,反正配个ssh也不难)</li>
-<li>hexo部署到github pages</li>
-</ol>
-<h2 id="安装node环境-需要有npm"><a href="#安装node环境-需要有npm" class="headerlink" title="安装node环境(需要有npm)"></a>安装node环境(需要有npm)</h2><p>用的Windows装的,nodejs安装包官网上下载,安装完后自带npm</p>
-<h2 id="安装hexo-cli"><a href="#安装hexo-cli" class="headerlink" title="安装hexo-cli"></a>安装hexo-cli</h2><p>npm原本的源太慢了,所以用了阿里的npm源,npm就是一个包管理器,跟maven差不多,maven的中央仓库相信用过的知道速度如何…记得全局安装(-g)哦,安装完就有hexo命令了</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm --registry https://registry.npm.taobao.org install hexo-cli -g</span><br></pre></td></tr></table></figure>
-<p>你想安装你的博客生成工具到哪,比如E://blog,就到E盘目录下,按<code>shift+鼠标右键</code>,点击打开当前目录的命令行,用hexo命令初始化,然后可以去喝杯茶等待安装完成…</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm --registry https://registry.npm.taobao.org install</span><br></pre></td></tr></table></figure>
-<p>安装完了后,hexo的几个命令你都可以用了,除了hexo deploy(因为这个是部署用的,还没配部署呢),先来看下demo效果先</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p><img src="/uploads/images/hexo启动成功.PNG" alt="hexo启动成功"></p>
-<p>还不赶紧打开浏览器看看效果!</p>
-<h2 id="配置git的ssh秘钥"><a href="#配置git的ssh秘钥" class="headerlink" title="配置git的ssh秘钥"></a>配置git的ssh秘钥</h2><p>git首先要配置下email和name先,代码提交的时候会有你的个人信息,这样有什么问题别人可以找你,毕竟email是程序猿每天都得关注的</p>
-<p>这里说个技巧,git config有全局的和当前git项目下的,全局的建议用你的个人最常用邮箱和个人昵称,因为学习技术嘛是很漫长的过程,自己学写一些自己练习的代码呀或者私人项目是贯穿于整个职业道路上的,比较固定,至于用公司邮箱和公司昵称的,谁知道你下个月是不是准备跳槽了呢,所以,公司项目的话,配config不要配置成全局较好,接到一个项目配这个项目的config,下面准备配置全局的git config了哦</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;自己的邮箱地址&quot;</span><br><span class="line">git config --global user.name &quot;自己的昵称&quot;</span><br></pre></td></tr></table></figure>
-<p>很多新手都很不明白git的ssh是什么原理,这里简单说明下,首先在本地生成ssh公钥和私钥,公钥呢,就相当于两兄弟,同个父母生的,公钥呢放到github上,相当于在github当接头人,私钥在你本机的电脑上,你呢,用这把私钥去访问github,哦,你的兄弟认出你了,放行,有人际关系就是好呀,连密码都不用输了呵呵</p>
-<p>这里要说下你的个人项目和公司的项目有多个git ssh秘钥怎么分开管理,先贴下我的~/.ssh目录下的结构</p>
-<p><img src="/uploads/images/git-ssh_文件夹结构.PNG" alt="git-ssh_文件夹结构"></p>
-<p><code>known_hosts</code>文件记录了用git ssh尝试过通信的服务器地址,是git会自动生成的,不用管</p>
-<p><code>ssh-keygen</code>是生成公钥和秘钥的工具,自动默认会生成在电脑个人目录下的.ssh文件夹,默认名称为id_rsa何id_rsa.pub(公钥,public的缩写后缀,放在git服务器上的),建议那个git服务器上的,要加个后缀好辨别点,比如github的</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.github -C &quot;你的邮箱地址&quot;</span><br></pre></td></tr></table></figure>
-<p>一路回车(如果你想给私钥也设置个密码的话,就输入下密码,但是这样的话每次push就还得输入你设置的私钥密码;如果不想的话,回车默认免密码),生成后,要自己写个config文件,放在.ssh文件夹下</p>
-<p><img src="/uploads/images/git-ssh_config文件样例.PNG" alt="git-ssh_config文件样例"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line"> IdentityFile C:\Users\john\.ssh\id_rsa.github</span><br><span class="line"> User godtree94</span><br></pre></td></tr></table></figure>
-<p>自己修改成自己相应的信息,这个会修改吧,修改完就差把<code>id_rsa.github.pub</code>的内容放上github的ssh设置的地方了,记得别有多余的空格哦,这个不懂的话百度<code>github添加ssh公钥</code>,懒得找图了</p>
-<p>配置完了后,测试下行不行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>看到提示信息:<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access</code>,恭喜你已经成功了</p>
-<h2 id="hexo部署到github-pages"><a href="#hexo部署到github-pages" class="headerlink" title="hexo部署到github pages"></a>hexo部署到github pages</h2><p>部署的流程是这样的:执行hexo deploy后,生成<code>.deploy_git</code>文件夹(该文件夹里面实际就是生成的博客静态页面),并把该文件夹<code>git init</code>初始化,hexo会去当前目录下读取<code>_config.yml</code>文件的deploy配置部分,把刚才生成的<code>.deploy_git</code>push上github的仓库</p>
-<h3 id="新建github仓库"><a href="#新建github仓库" class="headerlink" title="新建github仓库"></a>新建github仓库</h3><p>建立仓库名的格式为:<code>&#39;用户名&#39;.github.io</code>,比如john.github.io,用户名跟你github的名字一样,而且不能包含大写字母,以下都假定github的用户名为john</p>
-<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>打开<code>_config.yml</code>文件,到最底部发现有<code>deploy:...</code>的属性<br>这里有两种配置,一种是hexo3.0之前的版本,一种是hexo3.0之后的版本,我的版本是3.2.2,我的配置是:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: http://github.com/john/john.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: test</span><br></pre></td></tr></table></figure>
-<p>只要替换用户名为自己的就行了,记得冒号后面要有空格,有点像python的语法,肯定是强迫症的人写的hexo</p>
-<h3 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h3><p>配置无误后,清理下hexo的缓存,生成静态页面文件,部署:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p><img src="/uploads/images/hexo-deploy-success.PNG" alt="hexo-deploy-success"></p>
-<p>看到done了,就证明成功了,赶紧输入<code>john.github.io</code>试下呗</p>
-<p>至于hexo怎么新建文章,怎么换主题等等,自己探索吧,hexo真的超赞!终于可以安心的用sublime写博客了!</p>
-<hr>
-<blockquote>
-<p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/18588/">https://godtree94.github.io/posts/18588/</a></p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Github Pages</tag>
       </tags>
   </entry>
   <entry>
@@ -178,9 +121,93 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/45792/">https://godtree94.github.io/posts/45792/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>knowledgeMap</title>
+    <url>/posts/90001/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><blockquote class="pullquote mindmap mindmap-md"><ul>
+<li><a href="https://hunterx.xyz/hexo-simple-mindmap-plugin-intro.html" target="_blank" rel="noopener">Hexo 的思维导图插件</a><ul>
+<li>前言</li>
+<li>使用方法<ul>
+<li>一</li>
+<li>二</li>
+<li>三</li>
+</ul>
+</li>
+<li>太长不看</li>
+<li>参考资料</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/90001/">https://godtree94.github.io/posts/90001/</a></p>
+</blockquote>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+      <tags>
+        <tag>java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>initMyBlogDone</title>
+    <url>/posts/18588/</url>
+    <content><![CDATA[<p>说起搭建博客,发现以前的我真的很折腾,用过WordPress,折腾各种主题各种插件,好不容易折腾完了放到了sae上,又搞下seo优化,到头来发现,真正写的文章少,质量也不行,后面干脆就都写在自己的txt文件里面存起来好了</p>
+<p>直到最近做项目看别人的博客看多了,发现好多大牛都直接把博客放在github pages上,是静态博客,想着又不用自己去操作貌似功能很强大的管理后台,于是我决定动刀了,于是有了现在这个我很喜欢的博客,应该不会再换了!</p>
+<p>搭建的思路先写下:</p>
+<ol>
+<li>安装node环境(需要有npm)</li>
+<li>用npm安装hexo-cli,并用hexo命令初始化一个文件夹,这个文件夹就相当于博客的静态页面生成工具,自带服务器环境</li>
+<li>配置git的ssh私钥,方便hexo deploy的时候调用git push时候不用输入密码(其实一开始我以为这一步骤是可以忽略的,但是试了下发现不成功,不知道哪一步错了还是真的不行,也没再试了,反正配个ssh也不难)</li>
+<li>hexo部署到github pages</li>
+</ol>
+<h2 id="安装node环境-需要有npm"><a href="#安装node环境-需要有npm" class="headerlink" title="安装node环境(需要有npm)"></a>安装node环境(需要有npm)</h2><p>用的Windows装的,nodejs安装包官网上下载,安装完后自带npm</p>
+<h2 id="安装hexo-cli"><a href="#安装hexo-cli" class="headerlink" title="安装hexo-cli"></a>安装hexo-cli</h2><p>npm原本的源太慢了,所以用了阿里的npm源,npm就是一个包管理器,跟maven差不多,maven的中央仓库相信用过的知道速度如何…记得全局安装(-g)哦,安装完就有hexo命令了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm --registry https://registry.npm.taobao.org install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p>你想安装你的博客生成工具到哪,比如E://blog,就到E盘目录下,按<code>shift+鼠标右键</code>,点击打开当前目录的命令行,用hexo命令初始化,然后可以去喝杯茶等待安装完成…</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm --registry https://registry.npm.taobao.org install</span><br></pre></td></tr></table></figure>
+<p>安装完了后,hexo的几个命令你都可以用了,除了hexo deploy(因为这个是部署用的,还没配部署呢),先来看下demo效果先</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/images/hexo启动成功.PNG" alt="hexo启动成功"></p>
+<p>还不赶紧打开浏览器看看效果!</p>
+<h2 id="配置git的ssh秘钥"><a href="#配置git的ssh秘钥" class="headerlink" title="配置git的ssh秘钥"></a>配置git的ssh秘钥</h2><p>git首先要配置下email和name先,代码提交的时候会有你的个人信息,这样有什么问题别人可以找你,毕竟email是程序猿每天都得关注的</p>
+<p>这里说个技巧,git config有全局的和当前git项目下的,全局的建议用你的个人最常用邮箱和个人昵称,因为学习技术嘛是很漫长的过程,自己学写一些自己练习的代码呀或者私人项目是贯穿于整个职业道路上的,比较固定,至于用公司邮箱和公司昵称的,谁知道你下个月是不是准备跳槽了呢,所以,公司项目的话,配config不要配置成全局较好,接到一个项目配这个项目的config,下面准备配置全局的git config了哦</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;自己的邮箱地址&quot;</span><br><span class="line">git config --global user.name &quot;自己的昵称&quot;</span><br></pre></td></tr></table></figure>
+<p>很多新手都很不明白git的ssh是什么原理,这里简单说明下,首先在本地生成ssh公钥和私钥,公钥呢,就相当于两兄弟,同个父母生的,公钥呢放到github上,相当于在github当接头人,私钥在你本机的电脑上,你呢,用这把私钥去访问github,哦,你的兄弟认出你了,放行,有人际关系就是好呀,连密码都不用输了呵呵</p>
+<p>这里要说下你的个人项目和公司的项目有多个git ssh秘钥怎么分开管理,先贴下我的~/.ssh目录下的结构</p>
+<p><img src="/uploads/images/git-ssh_文件夹结构.PNG" alt="git-ssh_文件夹结构"></p>
+<p><code>known_hosts</code>文件记录了用git ssh尝试过通信的服务器地址,是git会自动生成的,不用管</p>
+<p><code>ssh-keygen</code>是生成公钥和秘钥的工具,自动默认会生成在电脑个人目录下的.ssh文件夹,默认名称为id_rsa何id_rsa.pub(公钥,public的缩写后缀,放在git服务器上的),建议那个git服务器上的,要加个后缀好辨别点,比如github的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa.github -C &quot;你的邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+<p>一路回车(如果你想给私钥也设置个密码的话,就输入下密码,但是这样的话每次push就还得输入你设置的私钥密码;如果不想的话,回车默认免密码),生成后,要自己写个config文件,放在.ssh文件夹下</p>
+<p><img src="/uploads/images/git-ssh_config文件样例.PNG" alt="git-ssh_config文件样例"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line"> IdentityFile C:\Users\john\.ssh\id_rsa.github</span><br><span class="line"> User godtree94</span><br></pre></td></tr></table></figure>
+<p>自己修改成自己相应的信息,这个会修改吧,修改完就差把<code>id_rsa.github.pub</code>的内容放上github的ssh设置的地方了,记得别有多余的空格哦,这个不懂的话百度<code>github添加ssh公钥</code>,懒得找图了</p>
+<p>配置完了后,测试下行不行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>看到提示信息:<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access</code>,恭喜你已经成功了</p>
+<h2 id="hexo部署到github-pages"><a href="#hexo部署到github-pages" class="headerlink" title="hexo部署到github pages"></a>hexo部署到github pages</h2><p>部署的流程是这样的:执行hexo deploy后,生成<code>.deploy_git</code>文件夹(该文件夹里面实际就是生成的博客静态页面),并把该文件夹<code>git init</code>初始化,hexo会去当前目录下读取<code>_config.yml</code>文件的deploy配置部分,把刚才生成的<code>.deploy_git</code>push上github的仓库</p>
+<h3 id="新建github仓库"><a href="#新建github仓库" class="headerlink" title="新建github仓库"></a>新建github仓库</h3><p>建立仓库名的格式为:<code>&#39;用户名&#39;.github.io</code>,比如john.github.io,用户名跟你github的名字一样,而且不能包含大写字母,以下都假定github的用户名为john</p>
+<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>打开<code>_config.yml</code>文件,到最底部发现有<code>deploy:...</code>的属性<br>这里有两种配置,一种是hexo3.0之前的版本,一种是hexo3.0之后的版本,我的版本是3.2.2,我的配置是:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: http://github.com/john/john.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: test</span><br></pre></td></tr></table></figure>
+<p>只要替换用户名为自己的就行了,记得冒号后面要有空格,有点像python的语法,肯定是强迫症的人写的hexo</p>
+<h3 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h3><p>配置无误后,清理下hexo的缓存,生成静态页面文件,部署:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/images/hexo-deploy-success.PNG" alt="hexo-deploy-success"></p>
+<p>看到done了,就证明成功了,赶紧输入<code>john.github.io</code>试下呗</p>
+<p>至于hexo怎么新建文章,怎么换主题等等,自己探索吧,hexo真的超赞!终于可以安心的用sublime写博客了!</p>
+<hr>
+<blockquote>
+<p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/18588/">https://godtree94.github.io/posts/18588/</a></p>
+</blockquote>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Github Pages</tag>
       </tags>
   </entry>
   <entry>
@@ -215,7 +242,7 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/2135/">https://godtree94.github.io/posts/2135/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>Classloader</tag>
       </tags>
@@ -237,7 +264,7 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/12425/">https://godtree94.github.io/posts/12425/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>java IO 框架</tag>
       </tags>
@@ -281,7 +308,7 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/36228/">https://godtree94.github.io/posts/36228/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>前端开发</tag>
       </tags>
@@ -486,7 +513,7 @@
 <blockquote>
 <p><strong>版权声明:</strong><br>本文首发于<a href="https://godtree94.github.io">GODTREE 博客</a>，版权所有，侵权必究，转载请注明出处。<br>本文永久链接：<a href="https://godtree94.github.io/posts/37573/">https://godtree94.github.io/posts/37573/</a></p>
 </blockquote>
-]]></content>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
       <tags>
         <tag>正则表达式</tag>
       </tags>
