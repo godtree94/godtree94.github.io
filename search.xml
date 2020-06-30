@@ -311,6 +311,42 @@
 <li>线程实现</li>
 </ul>
 </li>
+<li>JVM<ul>
+<li>判断能否gc<ul>
+<li>引用计数算法（Reference Counting）</li>
+<li>根搜索算法（GC Root Tracing）</li>
+</ul>
+</li>
+<li>gc类型<ul>
+<li>Minor GC</li>
+<li>Full GC（Major GC）</li>
+</ul>
+</li>
+<li><a href="https://www.cnblogs.com/aspirant/p/8662690.html" target="_blank" rel="noopener">gc回收算法</a><ul>
+<li>标记清除（mark-sweep）</li>
+<li>标记复制（mark-copy）</li>
+<li>标记整理（mark-compact）</li>
+<li>分代收集（generational-collection）</li>
+</ul>
+</li>
+<li>内存结构<ul>
+<li>堆<ul>
+<li><a href="https://www.cnblogs.com/jswang/p/9056038.html" target="_blank" rel="noopener">新生代</a><ul>
+<li>Eden</li>
+<li>S1（Survivor1）</li>
+<li>S2（Survivor2）</li>
+</ul>
+</li>
+<li>老年代</li>
+</ul>
+</li>
+<li>方法区</li>
+<li>栈</li>
+<li>程序计数器</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>框架源码解析<ul>
